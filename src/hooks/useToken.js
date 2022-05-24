@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Button, Grid, Text } from "@nextui-org/react"
 
-function Login() {
-  const [token, setToken] = useState("")
+function useToken({ saveToken, retrievePlaylists, token, logout }) {
 
   const CLIENT_ID = "99783215c9484f9280b7aa9ff357e33a"
   const REDIRECT_URI = "http://localhost:3000"
@@ -24,13 +23,19 @@ function Login() {
         window.location.hash = ""
         window.localStorage.setItem("token", token)
     }
-    setToken(token)
+    saveToken(token)
   }, [])
-
-  const logout = () => {
-    setToken("")
-    window.localStorage.removeItem("token")
-  }
+  
+  useEffect(() => {
+    fetch("https://api.spotify.com/v1/me/playlists", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+      },
+    })
+      .then(res => res.json())
+      .then(data => retrievePlaylists(data.items))
+  }, [])
 
   return (
     <div>
@@ -59,4 +64,4 @@ function Login() {
   )
 }
 
-export default Login
+export default useToken
