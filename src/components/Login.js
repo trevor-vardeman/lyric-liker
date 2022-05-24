@@ -6,7 +6,7 @@
 // function Login({ saveToken, retrievePlaylists, token, wipeToken }) {
 //   // const [loggedIn, setLoggedIn] = useState(false)
 
-//   const CLIENT_ID = "99783215c9484f9280b7aa9ff357e33a"
+//   const CLIENT_ID = "c3404f8cae724e35997b47c8531879c4"
 //   const REDIRECT_URI = "http://localhost:3000"
 //   const scope = 'streaming user-read-email user-read-private user-library-read user-library-modify user-read-playback-state user-modify-playback-state user-read-currently-playing playlist-read-collaborative playlist-read-private user-top-read'
 
@@ -122,7 +122,7 @@ import { Button, Grid, Text } from "@nextui-org/react"
 function Login() {
   const [token, setToken] = useState("")
 
-  const CLIENT_ID = "99783215c9484f9280b7aa9ff357e33a"
+  const CLIENT_ID = "c3404f8cae724e35997b47c8531879c4"
   const REDIRECT_URI = "http://localhost:3000"
   const scope = 'streaming user-read-email user-read-private user-library-read user-library-modify user-read-playback-state user-modify-playback-state user-read-currently-playing playlist-read-collaborative playlist-read-private user-top-read'
 
@@ -144,17 +144,18 @@ function Login() {
     }
     setToken(token)
   }, [])
-
-    useEffect(() => {
+  
+  useEffect(() => {
+    if (token.length > 0) {
       fetch("https://api.spotify.com/v1/me/playlists", {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,
-          // "Access-Control-Allow-Origin": "http://localhost:3000"
         },
       })
         .then(res => res.json())
         .then(data => console.log(data.items))
+    }
   }, [token])
 
   const logout = () => {

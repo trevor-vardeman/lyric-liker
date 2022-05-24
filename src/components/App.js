@@ -43,7 +43,7 @@
 import '../App.css'
 import { NextUIProvider } from '@nextui-org/react'
 import Login from './Login'
-// import SpotifyContainer from './SpotifyContainer'
+import PlaylistContainer from './PlaylistContainer'
 import LyricContainer from './LyricContainer'
 
 function App() {
@@ -52,9 +52,9 @@ function App() {
       <header className="App-header">
         <NextUIProvider>
           <Login />
-          {/* <SpotifyContainer /> */}
+          <PlaylistContainer />
           <LyricContainer />
-          </NextUIProvider>
+        </NextUIProvider>
       </header>
     </div>
   );
