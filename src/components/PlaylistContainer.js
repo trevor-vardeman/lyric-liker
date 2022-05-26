@@ -1,28 +1,29 @@
 import React, { useState, useEffect } from 'react'
-import Playlists from './Playlists'
+import Playlist from './Playlist'
 
-function PlaylistContainer({ playlists }) {
-  // const [playlists, setPlaylists] = useState([])
+function PlaylistContainer({ token, retrievePlaylists, playlists }) {
   // const playlistsToShow = playlists ? playlists : "No playlists available"
-  // console.log(playlists)
-  // const isTokenNull = !token ? true : false
 
-  // useEffect(() => {
-  //   fetch("https://api.spotify.com/v1/me/playlists", {
-  //     method: "GET",
-  //     headers: {
-  //       "Authorization": `Bearer ${token}`,
-  //     },
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => setPlaylists(data.items))
-  //     .catch(err => alert(err.message))
-  // }, [token])
+  useEffect(() => {
+    if (token != null) {
+      fetch("https://api.spotify.com/v1/me/playlists", {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      })
+        .then(res => res.json())
+        .then(data => {
+          console.log(data.items)
+          retrievePlaylists(data.items)
+        })
+    }
+  }, [token])
 
   return (
     <div>
-      {/* {playlists.length === undefined || playlists.length === 0 ? "No playlists available" : <Playlists />} */}
-      hi
+      <Playlist  />
+      {(playlists.length === null || playlists.length === 0) ? "No playlists available" : playlists.map(playlist => playlist.name)}
     </div>
   )
 }
