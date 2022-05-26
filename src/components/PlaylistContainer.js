@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Playlist from './Playlist'
 
 function PlaylistContainer({ token, retrievePlaylists, playlists }) {
-  // const playlistsToShow = playlists ? playlists : "No playlists available"
-
   useEffect(() => {
     if (token != null) {
       fetch("https://api.spotify.com/v1/me/playlists", {
@@ -22,8 +20,11 @@ function PlaylistContainer({ token, retrievePlaylists, playlists }) {
 
   return (
     <div>
-      <Playlist  />
-      {(playlists.length === null || playlists.length === 0) ? "No playlists available" : playlists.map(playlist => playlist.name)}
+      {playlists.length > 0 ?
+      playlists.map((playlist) => (
+        <Playlist key={playlist.id} playlist={playlist} />
+      ))
+      : null}
     </div>
   )
 }
