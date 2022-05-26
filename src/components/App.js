@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import '../App.css'
 import { NextUIProvider } from '@nextui-org/react'
 import Login from './Login'
-import PlaylistContainer from './PlaylistContainer'
+import Playlists from './Playlists'
 import LyricContainer from './LyricContainer'
 
 function App() {
@@ -28,7 +27,7 @@ function App() {
       <header className="App-header">
         <NextUIProvider>
           <Login token={token} saveToken={saveToken} logout={logout} />
-          <PlaylistContainer token={token} retrievePlaylists={retrievePlaylists} playlists={playlists} />
+          <Playlists token={token} retrievePlaylists={retrievePlaylists} playlists={playlists} />
           <LyricContainer />
         </NextUIProvider>
       </header>
