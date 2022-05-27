@@ -18,10 +18,15 @@ function Playlists({ token, retrievePlaylists, playlists }) {
     }
   }, [token])
 
+  function playlistSelection() {
+    console.log("click")
+  }
+
   return (
     <div>
       {playlists.length > 0 ?
         <Table
+          onClick={playlistSelection}
           bordered
           shadow={false}
           aria-label="Table showing the user's first 20 playlists"
@@ -36,7 +41,7 @@ function Playlists({ token, retrievePlaylists, playlists }) {
           </Table.Header>
           <Table.Body>
             {playlists.map((playlist) => (
-              <Table.Row key={playlist.id}>
+              <Table.Row key={playlist.id} >
                 <Table.Cell>{playlist.name}</Table.Cell>
               </Table.Row>
             ))}
