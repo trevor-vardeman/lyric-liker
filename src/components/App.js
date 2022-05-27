@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NextUIProvider } from '@nextui-org/react'
+// import { NextUIProvider } from '@nextui-org/react'
 import Login from './Login'
 import Playlists from './Playlists'
 import LyricContainer from './LyricContainer'
@@ -25,11 +25,11 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <NextUIProvider>
+        {/* <NextUIProvider> */}
           <Login token={token} saveToken={saveToken} logout={logout} />
           <Playlists token={token} retrievePlaylists={retrievePlaylists} playlists={playlists} />
           <LyricContainer />
-        </NextUIProvider>
+        {/* </NextUIProvider> */}
       </header>
     </div>
   );

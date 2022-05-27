@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { Table } from '@nextui-org/react'
+// import { Table } from '@nextui-org/react'
+import Table from 'react-bootstrap/Table';
 
 function Playlists({ token, retrievePlaylists, playlists }) {
   useEffect(() => {
@@ -12,7 +13,6 @@ function Playlists({ token, retrievePlaylists, playlists }) {
       })
         .then(res => res.json())
         .then(data => {
-          console.log(data.items)
           retrievePlaylists(data.items)
         })
     }
@@ -22,30 +22,50 @@ function Playlists({ token, retrievePlaylists, playlists }) {
     console.log("click")
   }
 
+  // return (
+  //   <div>
+  //     {playlists.length > 0 ?
+  //       <Table
+  //         bordered
+  //         shadow={true}
+  //         aria-label="Table showing the user's first 20 playlists"
+  //         css={{
+  //           height: "100px",
+  //           minWidth: "100px",
+  //         }}
+  //         selectionMode="single"
+  //       >
+  //         <Table.Header>
+  //           <Table.Column>Playlists</Table.Column>
+  //         </Table.Header>
+  //         <Table.Body>
+  //           {playlists.map((playlist) => (
+  //             <Table.Row onClick={playlistSelection} key={playlist.id}>
+  //               <Table.Cell>{playlist.name}</Table.Cell>
+  //             </Table.Row >
+  //           ))}
+  //         </Table.Body>
+  //       </Table>
+  //     : null}
+  //   </div>
+  // )
+
   return (
     <div>
       {playlists.length > 0 ?
-        <Table
-          onClick={playlistSelection}
-          bordered
-          shadow={false}
-          aria-label="Table showing the user's first 20 playlists"
-          css={{
-            height: "100px",
-            minWidth: "100px",
-          }}
-          selectionMode="single"
-        >
-          <Table.Header>
-            <Table.Column>Playlists</Table.Column>
-          </Table.Header>
-          <Table.Body>
+        <Table striped bordered hover size="sm" variant="dark">
+          <thead>
+            <tr>
+              <th>Playlists</th>
+            </tr>
+          </thead>
+          <tbody>
             {playlists.map((playlist) => (
-              <Table.Row key={playlist.id} >
-                <Table.Cell>{playlist.name}</Table.Cell>
-              </Table.Row>
+              <tr>
+                <td key={playlist.id} onClick={playlistSelection}>{playlist.name}</td>
+              </tr>
             ))}
-          </Table.Body>
+          </tbody>
         </Table>
       : null}
     </div>

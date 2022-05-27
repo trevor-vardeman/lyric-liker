@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
-import { Button, Grid, Text } from "@nextui-org/react"
+// import { Button, Grid, Text } from "@nextui-org/react"
+import Button from 'react-bootstrap/Button';
 
 function Login({ token, saveToken, logout }) {
   const CLIENT_ID = "c3404f8cae724e35997b47c8531879c4"
@@ -25,29 +26,34 @@ function Login({ token, saveToken, logout }) {
     saveToken(token)
   }, [])
 
+  // return (
+  //   <div>
+  //     {!token ?
+  //     <a href={`${url}`}>
+  //       <Text
+  //         h1
+  //         size={60}
+  //         css={{
+  //           textGradient: "45deg, $blue600 0%, $green600 90%",
+  //         }}
+  //         weight="bold"
+  //       >Log in with Spotify
+  //       </Text>
+  //     </a>
+  //     : <Grid.Container gap={2}>
+  //         <Grid>
+  //           <Button auto color="error" rounded bordered onClick={() => logout()}>
+  //           Logout
+  //           </Button>
+  //         </Grid>
+  //       </Grid.Container>}
+  //     <script src="https://sdk.scdn.co/spotify-player.js"></script>
+  //   </div>
+  // )
+
   return (
-    <div>
-      {!token ?
-      <a href={`${url}`}>
-        <Text
-          h1
-          size={60}
-          css={{
-            textGradient: "45deg, $blue600 0%, $green600 90%",
-          }}
-          weight="bold"
-        >Log in with Spotify
-        </Text>
-      </a>
-      : <Grid.Container gap={2}>
-          <Grid>
-            <Button auto color="error" rounded bordered onClick={() => logout()}>
-            Logout
-            </Button>
-          </Grid>
-        </Grid.Container>}
+    <div>{!token ? <a href={`${url}`}>"Log in with Spotify"</a> : <Button onClick={() => logout()} variant="danger">Logout</Button>}
       <script src="https://sdk.scdn.co/spotify-player.js"></script>
-      
     </div>
   )
 }
