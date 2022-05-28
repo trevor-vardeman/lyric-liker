@@ -4,7 +4,7 @@ function Playlists({ allPlaylists, clickPlaylist }) {
   return (
     <div>
       {allPlaylists.length > 0 ?
-        <Table striped bordered hover size="sm" variant="dark" style={{"maxWidth": "max-content"}}>
+        <Table striped bordered hover size="sm" variant="dark" style={{minWidth: "max-content"}}>
           <thead>
             <tr>
               <th>Playlists</th>
@@ -12,8 +12,8 @@ function Playlists({ allPlaylists, clickPlaylist }) {
           </thead>
           <tbody>
             {allPlaylists.map((playlist) => (
-              <tr>
-                <td key={playlist.id} id={playlist.id} onClick={clickPlaylist}>{playlist.name}</td>
+              <tr key={playlist.id}>
+                <td id={playlist.id} onClick={clickPlaylist}>{playlist.name}</td>
               </tr>
             ))}
           </tbody>
