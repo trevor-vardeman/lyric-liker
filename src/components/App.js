@@ -26,6 +26,9 @@ function App() {
     setAllPlaylists([])
     setCurrentPlaylistId("")
     setCurrentPlaylistTracks([])
+    setCurrentTrackName("")
+    setCurrentArtistName("")
+    setCurrentAlbumName("")
   }
 
   //get user's playlists upon login
@@ -41,19 +44,18 @@ function App() {
         .then(data => {
           setAllPlaylists(data.items)
         })
+        .catch(err => alert(err))
     }
   }, [token])
-
 
   // user clicks a playlist
   function clickPlaylist(e) {
     setCurrentPlaylistId(e.target.id)
   }
 
-
   // get songs from selected playlist
   useEffect(() => {
-    if (token != null) {
+    if (token != null && currentPlaylistId != null) {
     fetch(`https://api.spotify.com/v1/playlists/${currentPlaylistId}/tracks`, {
       method: "GET",
       headers: {
@@ -64,7 +66,6 @@ function App() {
       .then(res => res.json())
       .then(data => {
         setCurrentPlaylistTracks(data.items)
-        console.log(data.items)
       })
     }
   }, [currentPlaylistId])
@@ -75,6 +76,12 @@ function App() {
     setCurrentArtistName(e.artists[0].name)
     setCurrentAlbumName(e.album.name)
   }
+
+  useEffect(() => {
+    if (currentTrackName !== "") {
+      
+    }
+  }, [currentTrackName])
 
   return (
     <div>
