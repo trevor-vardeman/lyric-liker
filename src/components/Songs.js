@@ -1,10 +1,6 @@
 import Table from 'react-bootstrap/Table'
 
-function Songs({ currentPlaylistTracks }) {
-  function clickSong(e) {
-    console.log(e)
-  }
-
+function Songs({ currentPlaylistTracks, clickSong }) {
   return (
     <div>
       {currentPlaylistTracks.length > 0 ?
@@ -18,7 +14,7 @@ function Songs({ currentPlaylistTracks }) {
           </thead>
           <tbody>
             {currentPlaylistTracks.map((playlist) => (
-              <tr key={playlist.trackid} id={playlist.trackid} onClick={clickSong}>
+              <tr key={playlist.trackid} id={playlist.trackid} onClick={() => clickSong(playlist.track)}>
                 <td>{playlist.track.name}</td>
                 <td>{playlist.track.artists[0].name}</td>
                 <td>{playlist.track.album.name}</td>

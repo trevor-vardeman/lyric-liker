@@ -10,17 +10,25 @@ function App() {
   const [allPlaylists, setAllPlaylists] = useState([])
   const [currentPlaylistId, setCurrentPlaylistId] = useState("")
   const [currentPlaylistTracks, setCurrentPlaylistTracks] = useState([])
+  const [currentTrackName, setCurrentTrackName] = useState("")
+  const [currentArtistName, setCurrentArtistName] = useState("")
+  const [currentAlbumName, setCurrentAlbumName] = useState("")
 
+  // get token for Spotify authentication
   function saveToken(token) {
     setToken(token)
   }
 
+  // logout of the app
   function logout() {
     setToken(null)
     window.localStorage.removeItem("token")
     setAllPlaylists([])
+    setCurrentPlaylistId("")
+    setCurrentPlaylistTracks([])
   }
 
+  //get user's playlists upon login
   useEffect(() => {
     if (token != null) {
       fetch("https://api.spotify.com/v1/me/playlists", {
@@ -36,10 +44,14 @@ function App() {
     }
   }, [token])
 
+
+  // user clicks a playlist
   function clickPlaylist(e) {
     setCurrentPlaylistId(e.target.id)
   }
 
+
+  // get songs from selected playlist
   useEffect(() => {
     if (token != null) {
     fetch(`https://api.spotify.com/v1/playlists/${currentPlaylistId}/tracks`, {
@@ -57,12 +69,19 @@ function App() {
     }
   }, [currentPlaylistId])
 
+  // user clicks a song
+  function clickSong(e) {
+    setCurrentTrackName(e.name)
+    setCurrentArtistName(e.artists[0].name)
+    setCurrentAlbumName(e.album.name)
+  }
+
   return (
     <div>
         <Login token={token} saveToken={saveToken} logout={logout} />
         <Stack direction="horizontal" gap={3} style={{alignItems: "flex-start"}}>
           <Playlists className="bg-light border" token={token} allPlaylists={allPlaylists} clickPlaylist={clickPlaylist} />
-          <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} />
+          <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} clickSong={clickSong} />
         </Stack>
     </div>
   )
