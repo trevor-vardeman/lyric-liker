@@ -1,9 +1,9 @@
-import React from 'react'
-
-function LyricContainer() {
+function Lyrics({ lyrics }) {
   return (
-    <div></div>
+    <div>
+      {lyrics !== "" ? <p>{lyrics}</p> : null}
+    </div>
   )
 }
 
-export default LyricContainer
+export default Lyrics

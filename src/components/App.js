@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Stack from 'react-bootstrap/Stack'
 import Login from './Login'
 import Playlists from './Playlists'
 import Songs from './Songs'
-import Stack from 'react-bootstrap/Stack'
+import Lyrics from './Lyrics'
 
 function App() {
   const [token, setToken] = useState()
@@ -98,9 +99,10 @@ function App() {
   return (
     <div>
         <Login token={token} saveToken={saveToken} logout={logout} />
-        <Stack direction="horizontal" gap={3} style={{alignItems: "flex-start"}}>
+        <Stack direction="horizontal" style={{alignItems: "flex-start"}}>
           <Playlists className="bg-light border" token={token} allPlaylists={allPlaylists} clickPlaylist={clickPlaylist} />
           <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} clickSong={clickSong} />
+          <Lyrics className="bg-light border" lyrics={lyrics} />
         </Stack>
     </div>
   )
