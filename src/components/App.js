@@ -13,6 +13,7 @@ function App() {
   const [currentTrackName, setCurrentTrackName] = useState("")
   const [currentArtistName, setCurrentArtistName] = useState("")
   const [currentTrackId, setCurrentTrackId] = useState("")
+  const [lyrics, setLyrics] = useState("")
 
   // get token for Spotify authentication
   function saveToken(token) {
@@ -82,7 +83,17 @@ function App() {
         .then(data => setCurrentTrackId(data.message.body.track_list[0].track.track_id))
         .catch(err => console.log(err.message))
     }
-  }, [currentTrackName])
+  }, [currentTrackName, currentArtistName])
+
+  // search for lyrics with track_id
+  useEffect(() => {
+    if (currentTrackId !== "") {
+      fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${currentTrackId}&apikey=${process.env.REACT_APP_MUSIXMATCH_KEY}`)
+        .then(res => res.json())
+        .then(data => setLyrics(data.message.body.lyrics.lyrics_body))
+        .catch(err => console.log(err.message))
+    }
+  },[currentTrackId])
 
   return (
     <div>
