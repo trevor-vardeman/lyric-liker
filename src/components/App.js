@@ -79,7 +79,7 @@ function App() {
   // search for song to get track_id
   useEffect(() => {
     if (currentTrackName !== "") {
-      fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?q_artist=${currentArtistName}&q_track=${currentTrackName}&apikey=${process.env.REACT_APP_MUSIXMATCH_KEY}`)
+      fetch(`https://api.musixmatch.com/ws/1.1/track.search?q_artist=${currentArtistName}&q_track=${currentTrackName}&apikey=${process.env.REACT_APP_MUSIXMATCH_KEY}`)
         .then(res => res.json())
         .then(data => setCurrentTrackId(data.message.body.track_list[0].track.track_id))
         .catch(err => console.log(err.message))
@@ -89,7 +89,7 @@ function App() {
   // search for lyrics with track_id
   useEffect(() => {
     if (currentTrackId !== "") {
-      fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${currentTrackId}&apikey=${process.env.REACT_APP_MUSIXMATCH_KEY}`)
+      fetch(`https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${currentTrackId}&apikey=${process.env.REACT_APP_MUSIXMATCH_KEY}`)
         .then(res => res.json())
         .then(data => setLyrics(data.message.body.lyrics.lyrics_body))
         .catch(err => console.log(err.message))
