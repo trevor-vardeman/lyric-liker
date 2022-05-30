@@ -38,12 +38,11 @@ function App() {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
       })
         .then(res => res.json())
-        .then(data => {
-          setAllPlaylists(data.items)
-        })
+        .then(data => setAllPlaylists(data.items))
         .catch(err => alert(err))
     }
   }, [token])
@@ -56,17 +55,16 @@ function App() {
   // get songs from selected playlist
   useEffect(() => {
     if (token != null && currentPlaylistId != null) {
-    fetch(`https://api.spotify.com/v1/playlists/${currentPlaylistId}/tracks`, {
-      method: "GET",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then(res => res.json())
-      .then(data => {
-        setCurrentPlaylistTracks(data.items)
+      fetch(`https://api.spotify.com/v1/playlists/${currentPlaylistId}/tracks`, {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
       })
+        .then(res => res.json())
+        .then(data => setCurrentPlaylistTracks(data.items))
+        .catch(err => alert(err.message))
     }
   }, [currentPlaylistId])
 
@@ -77,9 +75,13 @@ function App() {
     setCurrentAlbumName(e.album.name)
   }
 
+  // fetch lyrics
   useEffect(() => {
     if (currentTrackName !== "") {
-      
+      fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=161013321&apikey=${process.env.REACT_APP_MUSIXMATCH_KEY}`)
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err.message))
     }
   }, [currentTrackName])
 
@@ -94,4 +96,4 @@ function App() {
   )
 }
 
-export default App;
+export default App
