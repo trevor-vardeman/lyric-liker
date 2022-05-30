@@ -12,7 +12,7 @@ function App() {
   const [currentPlaylistTracks, setCurrentPlaylistTracks] = useState([])
   const [currentTrackName, setCurrentTrackName] = useState("")
   const [currentArtistName, setCurrentArtistName] = useState("")
-  const [currentAlbumName, setCurrentAlbumName] = useState("")
+  const [currentTrackId, setCurrentTrackId] = useState("")
 
   // get token for Spotify authentication
   function saveToken(token) {
@@ -28,7 +28,7 @@ function App() {
     setCurrentPlaylistTracks([])
     setCurrentTrackName("")
     setCurrentArtistName("")
-    setCurrentAlbumName("")
+    setCurrentTrackId("")
   }
 
   //get user's playlists upon login
@@ -72,15 +72,14 @@ function App() {
   function clickSong(e) {
     setCurrentTrackName(e.name)
     setCurrentArtistName(e.artists[0].name)
-    setCurrentAlbumName(e.album.name)
   }
 
-  // fetch lyrics
+  // search for song to get track_id
   useEffect(() => {
     if (currentTrackName !== "") {
-      fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=161013321&apikey=${process.env.REACT_APP_MUSIXMATCH_KEY}`)
+      fetch(`https://cors-anywhere.herokuapp.com/https://api.musixmatch.com/ws/1.1/track.search?q_artist=${currentArtistName}&q_track=${currentTrackName}&apikey=${process.env.REACT_APP_MUSIXMATCH_KEY}`)
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => setCurrentTrackId(data.message.body.track_list[0].track.track_id))
         .catch(err => console.log(err.message))
     }
   }, [currentTrackName])
