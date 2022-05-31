@@ -1,7 +1,7 @@
 function Lyrics({ lyrics }) {
   return (
     <div>
-      {lyrics !== "" ? <p>{lyrics}</p> : null}
+      {lyrics !== "" ? <p className="text-center" style={{ whiteSpace: "pre" }}>{lyrics}</p> : null}
     </div>
   )
 }

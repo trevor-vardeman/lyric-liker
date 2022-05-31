@@ -4,7 +4,7 @@ function Playlists({ allPlaylists, clickPlaylist }) {
   return (
     <div>
       {allPlaylists.length > 0 ?
-        <Table striped bordered hover size="sm" variant="dark" style={{minWidth: "max-content"}}>
+        <Table striped bordered hover size="sm" variant="dark" style={{maxWidth: "max-content"}}>
           <thead>
             <tr>
               <th>Playlists</th>

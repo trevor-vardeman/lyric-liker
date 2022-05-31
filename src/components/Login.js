@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import Button from 'react-bootstrap/Button';
 
 function Login({ token, saveToken, logout }) {
   const CLIENT_ID = "c3404f8cae724e35997b47c8531879c4"
@@ -18,7 +17,6 @@ function Login({ token, saveToken, logout }) {
 
     if (!token && hash) {
         token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
-
         window.location.hash = ""
         window.localStorage.setItem("token", token)
     }
@@ -26,8 +24,8 @@ function Login({ token, saveToken, logout }) {
   }, [])
 
 return (
-    <div>{!token ? <a href={`${url}`}>Log in with Spotify</a> : <Button onClick={() => logout()} variant="danger">Logout</Button>}
-      <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }} >
+      {!token ? <a className="btn btn-success" href={`${url}`}>Log in with Spotify</a> : null}
     </div>
   )
 }
