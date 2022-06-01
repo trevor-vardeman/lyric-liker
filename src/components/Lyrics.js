@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 
-function Lyrics({ lyrics, currentTrackName, currentArtistName, currentAlbumName, pixelTrackingUrl, lyricsCopyright, saveLyrics }) {
+function Lyrics({ lyrics, currentTrackName, currentArtistName, currentAlbumName, pixelTrackingUrl, lyricsCopyright, clickSave, saveLyrics }) {
   return (
     <>
       {lyrics !== "" ? 
@@ -11,7 +12,7 @@ function Lyrics({ lyrics, currentTrackName, currentArtistName, currentAlbumName,
         <p>{lyrics}</p>
         <p style={{ fontSize: "8px"}}><small>{lyricsCopyright}</small></p>
         <img src={`${pixelTrackingUrl}`} alt="" />
-        <Button variant="primary" size="sm" onClick={saveLyrics}>Save Lyrics</Button>
+        {!saveLyrics ? <Button variant="primary" size="sm" onClick={clickSave}>Save Lyrics</Button> : <Button variant="primary" size="sm" disabled>Save Lyrics</Button>}
       </div> :
       null}
     </>

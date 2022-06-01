@@ -27,6 +27,7 @@ function App() {
   const [pixelTrackingUrl, setPixelTrackingUrl] = useState("")
   const [lyricsCopyright, setLyricsCopyright] = useState("")
   const [lyricsId, setLyricsId] = useState("")
+  const [saveLyrics, setSaveLyrics] = useState(false)
 
   // get token for Spotify authentication
   function saveToken(token) {
@@ -85,6 +86,7 @@ function App() {
 
   // user clicks a song
   function clickSong(e) {
+    setSaveLyrics(false)
     setCurrentTrackName(e.name)
     setCurrentArtistName(e.artists[0].name)
     setCurrentAlbumName(e.album.name)
@@ -122,7 +124,8 @@ function App() {
   },[currentTrackId])
 
   // save lyrics
-  function saveLyrics() {
+  function clickSave() {
+    setSaveLyrics(true)
     const songData = {
       id: lyricsId,
       name: currentTrackName,
@@ -172,7 +175,7 @@ function App() {
     <Stack direction="horizontal" style={{alignItems: "flex-start"}}>
       <Playlists className="bg-light border" token={token} allPlaylists={allPlaylists} clickPlaylist={clickPlaylist} />
       <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} clickSong={clickSong} />
-      <Lyrics className="bg-light border" lyrics={lyrics} currentTrackName={currentTrackName} currentArtistName={currentArtistName} currentAlbumName={currentAlbumName} pixelTrackingUrl={pixelTrackingUrl} lyricsCopyright={lyricsCopyright} saveLyrics={saveLyrics} />
+      <Lyrics className="bg-light border" lyrics={lyrics} lyricsId={lyricsId} currentTrackName={currentTrackName} currentArtistName={currentArtistName} currentAlbumName={currentAlbumName} pixelTrackingUrl={pixelTrackingUrl} lyricsCopyright={lyricsCopyright} saveLyrics={saveLyrics} clickSave={clickSave} />
     </Stack>
   </div>
   )
