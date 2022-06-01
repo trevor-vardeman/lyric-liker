@@ -1,21 +1,21 @@
 import Button from 'react-bootstrap/Button'
 import { NavLink } from 'react-router-dom'
 
-const linkStyles = {
-  display: "inline-block",
-  width: "auto",
-  padding: "12px",
-  margin: "0 6px 6px",
-  background: "blue",
-  textDecoration: "none",
-  color: "white",
-}
+// const linkStyles = {
+//   display: "inline-block",
+//   width: "auto",
+//   padding: "12px",
+//   margin: "0 6px 6px",
+//   background: "blue",
+//   textDecoration: "none",
+//   color: "white",
+// }
 
 function NavBar({ token, logout }) {
   return (
     <div>
       {!token ? null : <Button onClick={() => logout()} variant="danger">Logout</Button>}
-      <NavLink exact="true" to="/playlists" style={linkStyles}>Playlists</NavLink>
+      <NavLink exact="true" to="/playlists">Playlists</NavLink>
       {/* <NavLink
         to="/songs"
         exact
@@ -30,7 +30,7 @@ function NavBar({ token, logout }) {
         activeStyle={{ background: "darkblue"}}>
         Lyrics
       </NavLink> */}
-      <NavLink exact="true" to="/saved-lyrics" style={linkStyles}>Saved Lyrics</NavLink>
+      <NavLink exact="true" to="/saved-lyrics">Saved Lyrics</NavLink>
     </div>
   )
 }

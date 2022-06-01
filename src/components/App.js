@@ -21,10 +21,12 @@ function App() {
   const [currentPlaylistTracks, setCurrentPlaylistTracks] = useState([])
   const [currentTrackName, setCurrentTrackName] = useState("")
   const [currentArtistName, setCurrentArtistName] = useState("")
+  const [currentAlbumName, setCurrentAlbumName] = useState("")
   const [currentTrackId, setCurrentTrackId] = useState("")
   const [lyrics, setLyrics] = useState("")
   const [pixelTrackingUrl, setPixelTrackingUrl] = useState("")
   const [lyricsCopyright, setLyricsCopyright] = useState("")
+  const [lyricsId, setLyricsId] = useState("")
 
   // get token for Spotify authentication
   function saveToken(token) {
@@ -85,6 +87,7 @@ function App() {
   function clickSong(e) {
     setCurrentTrackName(e.name)
     setCurrentArtistName(e.artists[0].name)
+    setCurrentAlbumName(e.album.name)
   }
 
   // search for song to get track_id
@@ -104,10 +107,12 @@ function App() {
         .then(res => res.json())
         .then(data => {
           if (data.message.header.status_code === 200) {
+            // re-format the lyrics to remove some ugly stuff
             let returnedLyrics = data.message.body.lyrics.lyrics_body.split("...")
             let newLyrics = returnedLyrics[0]
-
             setLyrics(newLyrics)
+
+            setLyricsId(data.message.body.lyrics.lyrics_id)
             setPixelTrackingUrl(data.message.body.lyrics.pixel_tracking_url)
             setLyricsCopyright(data.message.body.lyrics.lyrics_copyright)
           } else setLyrics("No lyrics found!")
@@ -115,6 +120,27 @@ function App() {
         .catch(err => alert(err.message))
     }
   },[currentTrackId])
+
+  // save lyrics
+  function saveLyrics() {
+    const songData = {
+      id: lyricsId,
+      name: currentTrackName,
+      artist: currentArtistName,
+      album: currentAlbumName,
+      lyrics: lyrics,
+      lyrics_copyright: lyricsCopyright
+    }
+    fetch("http://localhost:3004/songs", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(songData),
+    })
+      .then(res => res.json())
+      .then(newItem => console.log(newItem))
+  }
 
   return (
     // <Router>
@@ -146,7 +172,7 @@ function App() {
     <Stack direction="horizontal" style={{alignItems: "flex-start"}}>
       <Playlists className="bg-light border" token={token} allPlaylists={allPlaylists} clickPlaylist={clickPlaylist} />
       <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} clickSong={clickSong} />
-      <Lyrics className="bg-light border" lyrics={lyrics} pixelTrackingUrl={pixelTrackingUrl} lyricsCopyright={lyricsCopyright} />
+      <Lyrics className="bg-light border" lyrics={lyrics} currentTrackName={currentTrackName} currentArtistName={currentArtistName} currentAlbumName={currentAlbumName} pixelTrackingUrl={pixelTrackingUrl} lyricsCopyright={lyricsCopyright} saveLyrics={saveLyrics} />
     </Stack>
   </div>
   )
