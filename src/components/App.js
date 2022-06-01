@@ -142,7 +142,7 @@ function App() {
       body: JSON.stringify(songData),
     })
       .then(res => res.json())
-      .then(newItem => console.log(newItem))
+      .then(newSong => console.log(newSong))
   }
 
   return (
@@ -177,6 +177,7 @@ function App() {
       <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} clickSong={clickSong} />
       <Lyrics className="bg-light border" lyrics={lyrics} lyricsId={lyricsId} currentTrackName={currentTrackName} currentArtistName={currentArtistName} currentAlbumName={currentAlbumName} pixelTrackingUrl={pixelTrackingUrl} lyricsCopyright={lyricsCopyright} saveLyrics={saveLyrics} clickSave={clickSave} />
     </Stack>
+    <SavedLyrics saveLyrics={saveLyrics} />
   </div>
   )
 }
