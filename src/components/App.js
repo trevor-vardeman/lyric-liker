@@ -24,6 +24,7 @@ function App() {
   const [currentTrackId, setCurrentTrackId] = useState("")
   const [lyrics, setLyrics] = useState("")
   const [pixelTrackingUrl, setPixelTrackingUrl] = useState("")
+  const [lyricsCopyright, setLyricsCopyright] = useState("")
 
   // get token for Spotify authentication
   function saveToken(token) {
@@ -103,8 +104,12 @@ function App() {
         .then(res => res.json())
         .then(data => {
           if (data.message.header.status_code === 200) {
-            setLyrics(data.message.body.lyrics.lyrics_body)
+            let returnedLyrics = data.message.body.lyrics.lyrics_body.split("...")
+            let newLyrics = returnedLyrics[0]
+
+            setLyrics(newLyrics)
             setPixelTrackingUrl(data.message.body.lyrics.pixel_tracking_url)
+            setLyricsCopyright(data.message.body.lyrics.lyrics_copyright)
           } else setLyrics("No lyrics found!")
         })
         .catch(err => alert(err.message))
@@ -141,7 +146,7 @@ function App() {
     <Stack direction="horizontal" style={{alignItems: "flex-start"}}>
       <Playlists className="bg-light border" token={token} allPlaylists={allPlaylists} clickPlaylist={clickPlaylist} />
       <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} clickSong={clickSong} />
-      <Lyrics className="bg-light border" lyrics={lyrics} pixelTrackingUrl={pixelTrackingUrl} />
+      <Lyrics className="bg-light border" lyrics={lyrics} pixelTrackingUrl={pixelTrackingUrl} lyricsCopyright={lyricsCopyright} />
     </Stack>
   </div>
   )
