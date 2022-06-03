@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Button from 'react-bootstrap/Button'
-import Stack from 'react-bootstrap/Stack'
 import Login from './Login'
 import Playlists from './Playlists'
 import Songs from './Songs'
@@ -9,8 +7,6 @@ import Lyrics from './Lyrics'
 import NavBar from './NavBar'
 import SavedLyrics from './SavedLyrics'
 import {
-  Link,
-  Routes,
   Route,
   Switch,
   useHistory,
@@ -172,16 +168,6 @@ function App() {
         </Route>
       </Switch>
     </div>
-
-  // <div>
-  //   {!token ? <Login token={token} saveToken={saveToken} /> : <NavBar token={token} logout={logout} />}
-  //   <Stack direction="horizontal" style={{alignItems: "flex-start"}}>
-  //     <Playlists className="bg-light border" token={token} allPlaylists={allPlaylists} clickPlaylist={clickPlaylist} />
-  //     <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} clickSong={clickSong} />
-  //     <Lyrics className="bg-light border" lyrics={lyrics} lyricsId={lyricsId} currentTrackName={currentTrackName} currentArtistName={currentArtistName} currentAlbumName={currentAlbumName} pixelTrackingUrl={pixelTrackingUrl} lyricsCopyright={lyricsCopyright} saveLyrics={saveLyrics} clickSave={clickSave} />
-  //   </Stack>
-  //   <SavedLyrics saveLyrics={saveLyrics} />
-  // </div>
   )
 }
 
