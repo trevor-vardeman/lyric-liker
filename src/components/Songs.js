@@ -1,7 +1,7 @@
 import Table from 'react-bootstrap/Table'
 
 function Songs({ currentPlaylistTracks, clickSong }) {
-  return (
+return (
     <div>
       {currentPlaylistTracks.length > 0 ?
         <Table striped bordered hover size="sm" variant="dark" style={{minWidth: "max-content"}}>
