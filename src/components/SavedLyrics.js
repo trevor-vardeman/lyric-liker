@@ -15,7 +15,7 @@ function SavedLyrics({ saveLyrics }) {
     <div>
       {savedSongs.length > 0 ? 
         savedSongs.map((song) => (
-          <Lyrics lyrics={song.lyrics} currentTrackName={song.name} currentArtistName={song.artist} currentAlbumName={song.album} lyricsCopyright={song.lyrics_copyright} />
+          <Lyrics key={song.id} lyrics={song.lyrics} currentTrackName={song.name} currentArtistName={song.artist} currentAlbumName={song.album} lyricsCopyright={song.lyrics_copyright} />
       )) : 
       null}
     </div>

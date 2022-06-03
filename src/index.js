@@ -25,9 +25,9 @@ root.render(
   //   </Routes>
   // </BrowserRouter> 
 
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 )

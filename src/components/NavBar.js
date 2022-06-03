@@ -15,7 +15,8 @@ function NavBar({ token, logout }) {
   return (
     <div>
       {!token ? null : <Button onClick={() => logout()} variant="danger">Logout</Button>}
-      <NavLink exact="true" to="/playlists">Playlists</NavLink>
+      <NavLink to="/playlists">Playlists</NavLink>
+      <NavLink to="/songs">Songs</NavLink>
       {/* <NavLink
         to="/songs"
         exact
@@ -30,7 +31,8 @@ function NavBar({ token, logout }) {
         activeStyle={{ background: "darkblue"}}>
         Lyrics
       </NavLink> */}
-      <NavLink exact="true" to="/saved-lyrics">Saved Lyrics</NavLink>
+      <NavLink to="/lyrics">Lyrics</NavLink>
+      <NavLink to="/saved-lyrics">Saved Lyrics</NavLink>
     </div>
   )
 }

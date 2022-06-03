@@ -12,6 +12,8 @@ import {
   Link,
   Routes,
   Route,
+  Switch,
+  useHistory,
 } from "react-router-dom"
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
   const [lyricsCopyright, setLyricsCopyright] = useState("")
   const [lyricsId, setLyricsId] = useState("")
   const [saveLyrics, setSaveLyrics] = useState(false)
+  let history = useHistory()
 
   // get token for Spotify authentication
   function saveToken(token) {
@@ -45,6 +48,7 @@ function App() {
     setCurrentArtistName("")
     setCurrentTrackId("")
     setLyrics("")
+    history.push("/")
   }
 
   //get user's playlists upon login
@@ -66,6 +70,7 @@ function App() {
   // user clicks a playlist
   function clickPlaylist(e) {
     setCurrentPlaylistId(e.target.id)
+    history.push('/songs')
   }
 
   // get songs from selected playlist
@@ -90,6 +95,7 @@ function App() {
     setCurrentTrackName(e.name)
     setCurrentArtistName(e.artists[0].name)
     setCurrentAlbumName(e.album.name)
+    history.push('/lyrics')
   }
 
   // search for song to get track_id
@@ -142,43 +148,40 @@ function App() {
       body: JSON.stringify(songData),
     })
       .then(res => res.json())
-      .then(newSong => console.log(newSong))
+      .then(newSong => {
+        console.log(newSong)
+        history.push('/saved-lyrics')
+      })
   }
 
   return (
-    // <Router>
-    //   {!token ? <Login token={token} saveToken={saveToken} /> : <NavBar token={token} logout={logout} />}
-    //   <Link to="/playlists">Get playlists</Link>
-    //   <Switch>
-    //     <Route exact path="/playlists">
-    //       <Playlists className="bg-light border" token={token} allPlaylists={allPlaylists} clickPlaylist={clickPlaylist} />
-    //     </Route>
-    //     <Route exact path="/songs">
-    //       <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} clickSong={clickSong} />
-    //     </Route>
-    //     <Route exact path="/lyrics">
-    //       <Lyrics className="bg-light border" lyrics={lyrics} />
-    //     </Route>
-    //     <Route exact path="/saved-lyrics">
-    //       <SavedLyrics />
-    //     </Route>
-    //   </Switch>
-    // </Router>
+    <div>
+      {!token ? <Login token={token} saveToken={saveToken} /> : <NavBar token={token} logout={logout} />}
+      <Switch>
+        <Route exact path="/playlists">
+          <Playlists className="bg-light border" token={token} allPlaylists={allPlaylists} clickPlaylist={clickPlaylist} />
+        </Route>
+        <Route exact path="/songs">
+          <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} clickSong={clickSong} />
+        </Route>
+        <Route exact path="/lyrics">
+          <Lyrics className="bg-light border" lyrics={lyrics} clickSave={clickSave} />
+        </Route>
+        <Route path="/saved-lyrics">
+          <SavedLyrics saveLyrics={saveLyrics} />
+        </Route>
+      </Switch>
+    </div>
 
-    // <div>
-    //   {!token ? <Login token={token} saveToken={saveToken} /> : <NavBar token={token} logout={logout} />}
-    //   <Link to="/playlists">Get playlists</Link>
-    // </div>
-
-  <div>
-    {!token ? <Login token={token} saveToken={saveToken} /> : <NavBar token={token} logout={logout} />}
-    <Stack direction="horizontal" style={{alignItems: "flex-start"}}>
-      <Playlists className="bg-light border" token={token} allPlaylists={allPlaylists} clickPlaylist={clickPlaylist} />
-      <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} clickSong={clickSong} />
-      <Lyrics className="bg-light border" lyrics={lyrics} lyricsId={lyricsId} currentTrackName={currentTrackName} currentArtistName={currentArtistName} currentAlbumName={currentAlbumName} pixelTrackingUrl={pixelTrackingUrl} lyricsCopyright={lyricsCopyright} saveLyrics={saveLyrics} clickSave={clickSave} />
-    </Stack>
-    <SavedLyrics saveLyrics={saveLyrics} />
-  </div>
+  // <div>
+  //   {!token ? <Login token={token} saveToken={saveToken} /> : <NavBar token={token} logout={logout} />}
+  //   <Stack direction="horizontal" style={{alignItems: "flex-start"}}>
+  //     <Playlists className="bg-light border" token={token} allPlaylists={allPlaylists} clickPlaylist={clickPlaylist} />
+  //     <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} clickSong={clickSong} />
+  //     <Lyrics className="bg-light border" lyrics={lyrics} lyricsId={lyricsId} currentTrackName={currentTrackName} currentArtistName={currentArtistName} currentAlbumName={currentAlbumName} pixelTrackingUrl={pixelTrackingUrl} lyricsCopyright={lyricsCopyright} saveLyrics={saveLyrics} clickSave={clickSave} />
+  //   </Stack>
+  //   <SavedLyrics saveLyrics={saveLyrics} />
+  // </div>
   )
 }
 
