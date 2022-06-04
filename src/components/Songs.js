@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom"
 import Table from 'react-bootstrap/Table'
 
 function Songs({ currentPlaylistTracks, clickSong }) {
 return (
     <div>
+      <Link to={"/playlists"}>Back to Playlists</Link>
       {currentPlaylistTracks.length > 0 ?
         <Table striped bordered hover size="sm" variant="dark" style={{minWidth: "max-content"}}>
           <thead>

@@ -1,37 +1,41 @@
 import { useState } from 'react'
+import { useHistory, Link} from "react-router-dom"
 import Button from 'react-bootstrap/Button'
-import { useHistory} from "react-router-dom"
 
 function Lyrics({ lyrics, lyricsId, currentTrackName, currentArtistName, currentAlbumName, pixelTrackingUrl, lyricsCopyright }) {
   const [saveLyrics, setSaveLyrics] = useState(false)
   let history = useHistory()
 
   function clickSave() {
-    setSaveLyrics(true)
-    const songData = {
-      id: lyricsId,
-      name: currentTrackName,
-      artist: currentArtistName,
-      album: currentAlbumName,
-      lyrics: lyrics,
-      lyrics_copyright: lyricsCopyright
-    }
-    fetch("http://localhost:3004/songs", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(songData),
-    })
-      .then(res => res.json())
-      .then(newSong => {
-        console.log(newSong)
-        history.push('/saved-lyrics')
+    if (lyrics === "No lyrics found!") alert("No lyrics to save!")
+    else {
+      setSaveLyrics(true)
+      const songData = {
+        id: lyricsId,
+        name: currentTrackName,
+        artist: currentArtistName,
+        album: currentAlbumName,
+        lyrics: lyrics,
+        lyrics_copyright: lyricsCopyright
+      }
+      fetch("http://localhost:3004/songs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(songData),
       })
+        .then(res => res.json())
+        .then(newSong => {
+          console.log(newSong)
+          history.push('/songs')
+        })
+    }
   }
   
   return (
     <>
+      <Link to={"/songs"}>Back to Songs</Link>
       {lyrics !== "" ? 
       <div className="text-center" style={{ whiteSpace: "pre" }}>
         <h2>{currentTrackName}</h2>

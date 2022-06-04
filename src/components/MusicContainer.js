@@ -99,31 +99,6 @@ function MusicContainer({ token }) {
     }
   },[currentTrackId])
 
-  // save lyrics
-  function clickSave() {
-    setSaveLyrics(true)
-    const songData = {
-      id: lyricsId,
-      name: currentTrackName,
-      artist: currentArtistName,
-      album: currentAlbumName,
-      lyrics: lyrics,
-      lyrics_copyright: lyricsCopyright
-    }
-    fetch("http://localhost:3004/songs", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(songData),
-    })
-      .then(res => res.json())
-      .then(newSong => {
-        console.log(newSong)
-        history.push('/saved-lyrics')
-      })
-  }
-
   return (
     <div>
       <Switch>
@@ -134,7 +109,7 @@ function MusicContainer({ token }) {
           <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} clickSong={clickSong} />
         </Route>
         <Route exact path="/lyrics">
-          <Lyrics className="bg-light border" lyrics={lyrics} clickSave={clickSave} lyricsId={lyricsId} currentTrackName={currentTrackName} currentArtistName={currentArtistName} currentAlbumName={currentAlbumName} lyricsCopyright={lyricsCopyright}  />
+          <Lyrics className="bg-light border" lyrics={lyrics} lyricsId={lyricsId} currentTrackName={currentTrackName} currentArtistName={currentArtistName} currentAlbumName={currentAlbumName} lyricsCopyright={lyricsCopyright}  />
         </Route>
         <Route path="/saved-lyrics">
           <SavedLyrics saveLyrics={saveLyrics} />
