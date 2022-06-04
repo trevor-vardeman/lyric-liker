@@ -6,7 +6,7 @@ import Songs from './Songs'
 import Lyrics from './Lyrics'
 import SavedLyrics from './SavedLyrics'
 
-function MusicContainer({ token, testState, setTestState }) {
+function MusicContainer({ token }) {
   const [allPlaylists, setAllPlaylists] = useState([])
   const [currentPlaylistId, setCurrentPlaylistId] = useState("")
   const [currentPlaylistTracks, setCurrentPlaylistTracks] = useState([])
@@ -20,20 +20,6 @@ function MusicContainer({ token, testState, setTestState }) {
   const [lyricsId, setLyricsId] = useState("")
   const [saveLyrics, setSaveLyrics] = useState(false)
   let history = useHistory()
-
-  // logout of the app
-  function logout() {
-    // setToken(null)
-    window.localStorage.removeItem("token")
-    setAllPlaylists([])
-    setCurrentPlaylistId("")
-    setCurrentPlaylistTracks([])
-    setCurrentTrackName("")
-    setCurrentArtistName("")
-    setCurrentTrackId("")
-    setLyrics("")
-    history.push("/")
-  }
 
   //get user's playlists upon login
   useEffect(() => {
@@ -142,7 +128,7 @@ function MusicContainer({ token, testState, setTestState }) {
     <div>
       <Switch>
         <Route exact path="/playlists">
-          <Playlists className="bg-light border" token={token} allPlaylists={allPlaylists} clickPlaylist={clickPlaylist} />
+          <Playlists className="bg-light border" allPlaylists={allPlaylists} clickPlaylist={clickPlaylist} />
         </Route>
         <Route exact path="/songs">
           <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} clickSong={clickSong} />

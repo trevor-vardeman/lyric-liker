@@ -6,8 +6,6 @@ function NavBar({ token, logout }) {
     <div>
       {!token ? null : <Button onClick={() => logout()} variant="danger">Logout</Button>}
       <NavLink to="/playlists">Playlists</NavLink>
-      <NavLink to="/songs">Songs</NavLink>
-      <NavLink to="/lyrics">Lyrics</NavLink>
       <NavLink to="/saved-lyrics">Saved Lyrics</NavLink>
     </div>
   )

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useHistory } from "react-router-dom"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Login from './Login'
 import NavBar from './NavBar'
@@ -6,14 +7,18 @@ import MusicContainer from './MusicContainer'
 
 function App() {
   const [token, setToken] = useState()
+  let history = useHistory()
 
-  // get token for Spotify authentication
+  // set token for Spotify authentication
   function saveToken(token) {
     setToken(token)
   }
   
+  // handle logout
   function logout() {
+    window.localStorage.removeItem("token")
     setToken("")
+    history.push("/")
   }
 
   return (
