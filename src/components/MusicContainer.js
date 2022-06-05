@@ -54,7 +54,10 @@ function MusicContainer({ token }) {
         },
       })
         .then(res => res.json())
-        .then(data => setCurrentPlaylistTracks(data.items))
+        .then(data => {
+          setCurrentPlaylistTracks(data.items)
+          console.log(data.items)
+        })
         .catch(err => alert(err.message))
     }
   }, [currentPlaylistId])
