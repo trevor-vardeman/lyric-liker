@@ -2,12 +2,12 @@ import Table from 'react-bootstrap/Table'
 
 function Playlists({ allPlaylists, clickPlaylist }) {
   return (
-    <div>
+    <div className="d-flex justify-content-center">
       {allPlaylists.length > 0 ?
         <Table striped bordered hover size="sm" variant="dark" style={{maxWidth: "max-content"}}>
           <thead>
             <tr>
-              <th>Playlists</th>
+              <th style={{textAlign: "center"}}>Your Playlists</th>
             </tr>
           </thead>
           <tbody>

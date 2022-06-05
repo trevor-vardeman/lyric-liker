@@ -24,7 +24,7 @@ function Login({ token, saveToken }) {
   }, [])
 
 return (
-    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }} >
+    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
       {!token ? <a className="btn btn-success" href={`${url}`}>Log in with Spotify</a> : null}
     </div>
   )

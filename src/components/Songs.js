@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom"
 import Table from 'react-bootstrap/Table'
+import Stack from 'react-bootstrap/Stack'
 
 function Songs({ currentPlaylistTracks, clickSong }) {
-return (
-    <div>
-      <Link to={"/playlists"}>Back to Playlists</Link>
+  return (
+    <Stack className="d-flex justify-content-center align-items-center" gap={3}>
+      <Link className="btn btn-outline-dark btn-sm" to={"/playlists"}>{`< Back to Playlists`}</Link>
       {currentPlaylistTracks.length > 0 ?
-        <Table striped bordered hover size="sm" variant="dark" style={{minWidth: "max-content"}}>
+        
+        <Table striped bordered hover size="sm" variant="dark" style={{maxWidth: "max-content"}}>
           <thead>
             <tr>
               <th>Title</th>
@@ -17,15 +19,16 @@ return (
           <tbody>
             {currentPlaylistTracks.map((playlist) => (
               <tr key={playlist.trackid} id={playlist.trackid} onClick={() => clickSong(playlist.track)}>
-                <td>{playlist.track.name}</td>
-                <td>{playlist.track.artists[0].name}</td>
-                <td>{playlist.track.album.name}</td>
+                <td key={playlist.track.external_ids.isrc}>{playlist.track.name}</td>
+                <td key={playlist.track.href}>{playlist.track.artists[0].name}</td>
+                <td key={playlist.track.uri}>{playlist.track.album.name}</td>
               </tr>
             ))}
           </tbody>
         </Table>
-      : null}
-    </div>
+      : 
+      <div className="text-center" style={{ whiteSpace: "pre" }}>{"Select a playlist first!"}</div>}
+    </Stack>
   )
 }
 

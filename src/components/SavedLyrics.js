@@ -35,7 +35,7 @@ function SavedLyrics({ saveLyrics }) {
             <h6>{song.album}</h6>
             <p>{song.lyrics}</p>
             <p style={{ fontSize: "8px"}}><small>{song.lyrics_copyright}</small></p>
-            {!saveLyrics ? <Button variant="warning" size="sm" onClick={() => deleteLyrics(song.id)}>Delete Lyrics</Button> : <Button variant="danger" size="sm" disabled>Save Lyrics</Button>}
+            {!saveLyrics ? <Button variant="outline-warning" size="sm" onClick={() => deleteLyrics(song.id)}>Delete Lyrics</Button> : <Button variant="danger" size="sm" disabled>Save Lyrics</Button>}
           </div> 
         )) :
         <div className="text-center" style={{ whiteSpace: "pre" }}>

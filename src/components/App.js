@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useHistory } from "react-router-dom"
+import Stack from 'react-bootstrap/Stack'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Login from './Login'
 import NavBar from './NavBar'
 import MusicContainer from './MusicContainer'
+import Footer from './Footer'
 
 function App() {
   const [token, setToken] = useState()
@@ -22,10 +24,11 @@ function App() {
   }
 
   return (
-    <div>
+    <Stack gap={3}>
       {!token ? <Login token={token} saveToken={saveToken} /> : <NavBar token={token} logout={logout} />}
       <MusicContainer token={token} />
-    </div>
+      <Footer token={token} />
+    </Stack>
   )
 }
 

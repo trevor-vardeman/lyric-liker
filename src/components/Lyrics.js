@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useHistory, Link} from "react-router-dom"
 import Button from 'react-bootstrap/Button'
+import Stack from 'react-bootstrap/Stack'
 
 function Lyrics({ lyrics, lyricsId, currentTrackName, currentArtistName, currentAlbumName, pixelTrackingUrl, lyricsCopyright }) {
   const [saveLyrics, setSaveLyrics] = useState(false)
@@ -26,16 +27,13 @@ function Lyrics({ lyrics, lyricsId, currentTrackName, currentArtistName, current
         body: JSON.stringify(songData),
       })
         .then(res => res.json())
-        .then(newSong => {
-          console.log(newSong)
-          history.push('/songs')
-        })
+        .then(newSong => history.push('/songs'))
     }
   }
   
   return (
-    <>
-      <Link to={"/songs"}>Back to Songs</Link>
+    <Stack className="d-flex justify-content-center align-items-center" gap={3}>
+      <Link className="btn btn-outline-dark btn-sm" to={"/songs"}>{`< Back to Songs`}</Link>
       {lyrics !== "" ? 
       <div className="text-center" style={{ whiteSpace: "pre" }}>
         <h2>{currentTrackName}</h2>
@@ -44,10 +42,10 @@ function Lyrics({ lyrics, lyricsId, currentTrackName, currentArtistName, current
         <p>{lyrics}</p>
         <p style={{ fontSize: "8px"}}><small>{lyricsCopyright}</small></p>
         <img src={`${pixelTrackingUrl}`} alt="" />
-        {!saveLyrics ? <Button variant="primary" size="sm" onClick={clickSave}>Save Lyrics</Button> : <Button variant="primary" size="sm" disabled>Save Lyrics</Button>}
+        {!saveLyrics ? <Button variant="outline-primary" size="sm" onClick={clickSave}>Save Lyrics</Button> : <Button variant="primary" size="sm" disabled>Save Lyrics</Button>}
       </div> :
-      null}
-    </>
+      <div className="text-center" style={{ whiteSpace: "pre" }}>{"Select a song first!"}</div>}
+    </Stack>
   )
 }
 
