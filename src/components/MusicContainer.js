@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import { Route, Switch, useHistory } from "react-router-dom"
 import Playlists from './Playlists'
 import Songs from './Songs'
@@ -9,6 +8,7 @@ import SavedLyrics from './SavedLyrics'
 function MusicContainer({ token }) {
   const [allPlaylists, setAllPlaylists] = useState([])
   const [currentPlaylistId, setCurrentPlaylistId] = useState("")
+  const [currentPlaylistName, setCurrentPlaylistName] = useState("")
   const [currentPlaylistTracks, setCurrentPlaylistTracks] = useState([])
   const [currentTrackName, setCurrentTrackName] = useState("")
   const [currentArtistName, setCurrentArtistName] = useState("")
@@ -39,6 +39,7 @@ function MusicContainer({ token }) {
 
   // user clicks a playlist
   function clickPlaylist(e) {
+    setCurrentPlaylistName(e.target.innerText)
     setCurrentPlaylistId(e.target.id)
     history.push('/songs')
   }
@@ -103,13 +104,13 @@ function MusicContainer({ token }) {
   },[currentTrackId])
 
   return (
-    <div>
+    <div style={{backgroundColor: "lightgrey"}}>
       <Switch>
         <Route exact path="/playlists">
           <Playlists className="bg-light border" allPlaylists={allPlaylists} clickPlaylist={clickPlaylist} />
         </Route>
         <Route exact path="/songs">
-          <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} clickSong={clickSong} />
+          <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} currentPlaylistName={currentPlaylistName} clickSong={clickSong} />
         </Route>
         <Route exact path="/lyrics">
           <Lyrics className="bg-light border" lyrics={lyrics} lyricsId={lyricsId} currentTrackName={currentTrackName} currentArtistName={currentArtistName} currentAlbumName={currentAlbumName} lyricsCopyright={lyricsCopyright}  />

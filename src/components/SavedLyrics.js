@@ -26,23 +26,23 @@ function SavedLyrics({ saveLyrics }) {
   }
 
   return (
-    <>
+    <div>
       {savedSongs.length > 0 ? 
         savedSongs.map((song) => (
-          <div key={song.id} className="text-center" style={{ whiteSpace: "pre" }}>
-            <h2>{song.name}</h2>
+          <div key={song.id} className="text-center" gap={3} style={{ whiteSpace: "pre", paddingBottom:"10px" }}>
+            <h2 className="font-link">{song.name}</h2>
             <h4>{song.artist}</h4>
             <h6>{song.album}</h6>
             <p>{song.lyrics}</p>
             <p style={{ fontSize: "8px"}}><small>{song.lyrics_copyright}</small></p>
-            {!saveLyrics ? <Button variant="outline-warning" size="sm" onClick={() => deleteLyrics(song.id)}>Delete Lyrics</Button> : <Button variant="danger" size="sm" disabled>Save Lyrics</Button>}
+            {!saveLyrics ? <Button variant="outline-danger" size="sm" onClick={() => deleteLyrics(song.id)}>Delete Lyrics</Button> : <Button variant="danger" size="sm" disabled>Save Lyrics</Button>}
           </div> 
         )) :
         <div className="text-center" style={{ whiteSpace: "pre" }}>
           <p>Go save some lyrics!</p>
         </div>
       }
-    </>
+    </div>
   )
 }
 

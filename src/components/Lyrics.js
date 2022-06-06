@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useHistory, Link} from "react-router-dom"
-import Button from 'react-bootstrap/Button'
 import Stack from 'react-bootstrap/Stack'
+import Button from 'react-bootstrap/Button'
 
 function Lyrics({ lyrics, lyricsId, currentTrackName, currentArtistName, currentAlbumName, pixelTrackingUrl, lyricsCopyright }) {
   const [saveLyrics, setSaveLyrics] = useState(false)
@@ -36,7 +36,7 @@ function Lyrics({ lyrics, lyricsId, currentTrackName, currentArtistName, current
       <Link className="btn btn-outline-dark btn-sm" to={"/songs"}>{`< Back to Songs`}</Link>
       {lyrics !== "" ? 
       <div className="text-center" style={{ whiteSpace: "pre" }}>
-        <h2>{currentTrackName}</h2>
+        <h2 className="font-link">{currentTrackName}</h2>
         <h4>{currentArtistName}</h4>
         <h6>{currentAlbumName}</h6>
         <p>{lyrics}</p>

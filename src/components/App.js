@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useHistory } from "react-router-dom"
-import Stack from 'react-bootstrap/Stack'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Stack from 'react-bootstrap/Stack'
 import Login from './Login'
 import NavBar from './NavBar'
 import MusicContainer from './MusicContainer'
@@ -24,10 +24,10 @@ function App() {
   }
 
   return (
-    <Stack gap={3}>
+    <Stack gap={3} style={{height: "100vh", position: "relative", backgroundColor: "lightgrey"}}>
       {!token ? <Login token={token} saveToken={saveToken} /> : <NavBar token={token} logout={logout} />}
       <MusicContainer token={token} />
-      <Footer token={token} />
+      <Footer style={{border: "5px solid black"}} token={token} />
     </Stack>
   )
 }
