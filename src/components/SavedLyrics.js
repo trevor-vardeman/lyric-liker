@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 
 function SavedLyrics({ saveLyrics }) {
@@ -26,23 +27,26 @@ function SavedLyrics({ saveLyrics }) {
   }
 
   return (
-    <div>
-      {savedSongs.length > 0 ? 
+    <Stack className="d-flex justify-content-center align-items-center" gap={3}>
+      {savedSongs.length > 0 ?
         savedSongs.map((song) => (
-          <div key={song.id} className="text-center" gap={3} style={{ whiteSpace: "pre", paddingBottom:"10px" }}>
-            <h2 className="font-link">{song.name}</h2>
-            <h4>{song.artist}</h4>
-            <h6>{song.album}</h6>
+          <div key={song.id} className="text-center" style={{ whiteSpace: "pre", paddingBottom:"5px" }}>
+            <Stack direction="horizontal" gap={3} style={ {border: "2px solid black", paddingRight: "10px" }}>
+              <img src={song.album_art} alt={`album artwork for ${song.album}`}/>
+              <div>
+                <h2 className="font-link">{song.name}</h2>
+                <h4><span style={{ color: "skyblue" }}>by</span> {song.artist}</h4>
+                <h6><span style={{ color: "skyblue" }}>on</span> {song.album}</h6>
+                <Button variant="outline-danger" size="sm" onClick={() => deleteLyrics(song.id)}>Delete Lyrics</Button>
+              </div>
+            </Stack>
             <p>{song.lyrics}</p>
-            <p style={{ fontSize: "8px"}}><small>{song.lyrics_copyright}</small></p>
-            {!saveLyrics ? <Button variant="outline-danger" size="sm" onClick={() => deleteLyrics(song.id)}>Delete Lyrics</Button> : <Button variant="danger" size="sm" disabled>Save Lyrics</Button>}
-          </div> 
+            <p style={{ fontSize: "8px" }}><small>{song.lyrics_copyright}</small></p>
+            <img src={`${song.pixel_tracking_url}`} alt="" />
+          </div>
         )) :
-        <div className="text-center" style={{ whiteSpace: "pre" }}>
-          <p>Go save some lyrics!</p>
-        </div>
-      }
-    </div>
+        <div className="text-center" style={{ whiteSpace: "pre" }}>{"Save some lyrics!"}</div>}
+    </Stack>
   )
 }
 

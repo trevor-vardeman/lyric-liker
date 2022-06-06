@@ -8,8 +8,8 @@ function Songs({ currentPlaylistTracks, currentPlaylistName, clickSong }) {
       <Link className="btn btn-outline-dark btn-sm" to={"/playlists"}>{`< Back to Playlists`}</Link>
       {currentPlaylistTracks.length > 0 ?
         <div>
-          <h1 className="font-link" style={{textAlign: 'center'}}>{currentPlaylistName}</h1>
-          <Table striped bordered hover size="sm" variant="dark" style={{maxWidth: "max-content"}}>
+          <h1 className="font-link" style={{ textAlign: "center" }}>{currentPlaylistName}</h1>
+          <Table striped bordered hover size="sm" variant="dark" style={{ maxWidth: "max-content" }}>
             <thead>
               <tr>
                 <th>Title</th>
@@ -19,7 +19,7 @@ function Songs({ currentPlaylistTracks, currentPlaylistName, clickSong }) {
             </thead>
             <tbody>
               {currentPlaylistTracks.map((playlist) => (
-                <tr key={playlist.trackid} id={playlist.trackid} onClick={() => clickSong(playlist.track)} style={{cursor: "pointer"}}>
+                <tr key={playlist.trackid} id={playlist.trackid} onClick={() => clickSong(playlist.track)} style={{ cursor: "pointer" }}>
                   <td key={playlist.track.external_ids.isrc}>{playlist.track.name}</td>
                   <td key={playlist.track.href}>{playlist.track.artists[0].name}</td>
                   <td key={playlist.track.uri}>{playlist.track.album.name}</td>

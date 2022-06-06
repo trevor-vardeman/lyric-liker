@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Route, Switch, useHistory } from "react-router-dom"
+import Landing from './Landing'
 import Playlists from './Playlists'
 import Songs from './Songs'
 import Lyrics from './Lyrics'
@@ -13,6 +14,7 @@ function MusicContainer({ token }) {
   const [currentTrackName, setCurrentTrackName] = useState("")
   const [currentArtistName, setCurrentArtistName] = useState("")
   const [currentAlbumName, setCurrentAlbumName] = useState("")
+  const [currentAlbumArt, setCurentAlbumArt] = useState("")
   const [currentTrackId, setCurrentTrackId] = useState("")
   const [lyrics, setLyrics] = useState("")
   const [pixelTrackingUrl, setPixelTrackingUrl] = useState("")
@@ -55,10 +57,7 @@ function MusicContainer({ token }) {
         },
       })
         .then(res => res.json())
-        .then(data => {
-          setCurrentPlaylistTracks(data.items)
-          console.log(data.items)
-        })
+        .then(data => setCurrentPlaylistTracks(data.items))
         .catch(err => alert(err.message))
     }
   }, [currentPlaylistId])
@@ -69,6 +68,7 @@ function MusicContainer({ token }) {
     setCurrentTrackName(e.name)
     setCurrentArtistName(e.artists[0].name)
     setCurrentAlbumName(e.album.name)
+    setCurentAlbumArt(e.album.images[1].url)
     history.push('/lyrics')
   }
 
@@ -104,8 +104,11 @@ function MusicContainer({ token }) {
   },[currentTrackId])
 
   return (
-    <div style={{backgroundColor: "lightgrey"}}>
+    <div style={{ backgroundColor: "lightgrey" }}>
       <Switch>
+        <Route exact path="/">
+          <Landing className="bg-light border" />
+        </Route>
         <Route exact path="/playlists">
           <Playlists className="bg-light border" allPlaylists={allPlaylists} clickPlaylist={clickPlaylist} />
         </Route>
@@ -113,7 +116,7 @@ function MusicContainer({ token }) {
           <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} currentPlaylistName={currentPlaylistName} clickSong={clickSong} />
         </Route>
         <Route exact path="/lyrics">
-          <Lyrics className="bg-light border" lyrics={lyrics} lyricsId={lyricsId} currentTrackName={currentTrackName} currentArtistName={currentArtistName} currentAlbumName={currentAlbumName} lyricsCopyright={lyricsCopyright}  />
+          <Lyrics className="bg-light border" lyrics={lyrics} lyricsId={lyricsId} currentTrackName={currentTrackName} currentArtistName={currentArtistName} currentAlbumName={currentAlbumName} currentAlbumArt={currentAlbumArt} lyricsCopyright={lyricsCopyright} pixelTrackingUrl={pixelTrackingUrl}  />
         </Route>
         <Route path="/saved-lyrics">
           <SavedLyrics saveLyrics={saveLyrics} />

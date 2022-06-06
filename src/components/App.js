@@ -24,10 +24,10 @@ function App() {
   }
 
   return (
-    <Stack gap={3} style={{height: "100vh", position: "relative", backgroundColor: "lightgrey"}}>
+    <Stack gap={3} style={{ height: "100vh", position: "relative", backgroundColor: "lightgrey" }}>
       {!token ? <Login token={token} saveToken={saveToken} /> : <NavBar token={token} logout={logout} />}
       <MusicContainer token={token} />
-      <Footer style={{border: "5px solid black"}} token={token} />
+      <Footer style={{ border: "5px solid black" }} token={token} />
     </Stack>
   )
 }
