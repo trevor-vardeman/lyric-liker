@@ -29,7 +29,7 @@ However, sometimes a lyric will catch my ear, and I'll want to understand the co
 11. Utilize and enjoy the app. :)
 
 ## Note
-If I were hosting this as a real application on the internet, I would purchase the Musixmatch paid subscription. Unfortunately the free subscription only provides 30% of the lyrics of every song. In the real world we would obvously want 100% of the lyrics of each song. Additionally, the Spotify API pulls in only the first 20 playlists and first 100 songs as well. This can be extended a little further
+If I were hosting this as a real application on the internet, I would purchase the Musixmatch paid subscription. Unfortunately the free subscription only provides 30% of the lyrics of every song. In the real world we would obvously want 100% of the lyrics of each song. Additionally, the Spotify API pulls in only the first 20 playlists and first 100 songs as well. This can be extended a little further.
 
 ## Credits
 APIs used:
