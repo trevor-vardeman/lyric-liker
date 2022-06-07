@@ -35,7 +35,7 @@ function MusicContainer({ token }) {
       })
         .then(res => res.json())
         .then(data => setAllPlaylists(data.items))
-        .catch(err => alert(err))
+        .catch(err => alert("1: ", err))
     }
   }, [token])
 
@@ -58,7 +58,7 @@ function MusicContainer({ token }) {
       })
         .then(res => res.json())
         .then(data => setCurrentPlaylistTracks(data.items))
-        .catch(err => alert(err.message))
+        .catch(err => alert("2: ", err.message))
     }
   }, [currentPlaylistId])
 
@@ -99,7 +99,7 @@ function MusicContainer({ token }) {
             setLyricsCopyright(data.message.body.lyrics.lyrics_copyright)
           } else setLyrics("No lyrics found!")
         })
-        .catch(err => alert(err.message))
+        .catch(err => alert("4: ", err.message))
     }
   },[currentTrackId])
 
@@ -113,7 +113,7 @@ function MusicContainer({ token }) {
           <Playlists className="bg-light border" allPlaylists={allPlaylists} clickPlaylist={clickPlaylist} />
         </Route>
         <Route exact path="/songs">
-          <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} currentPlaylistName={currentPlaylistName} clickSong={clickSong} />
+          <Songs className="bg-light border" currentPlaylistTracks={currentPlaylistTracks} currentPlaylistName={currentPlaylistName} currentPlaylistId={currentPlaylistId} clickSong={clickSong} />
         </Route>
         <Route exact path="/lyrics">
           <Lyrics className="bg-light border" lyrics={lyrics} lyricsId={lyricsId} currentTrackName={currentTrackName} currentArtistName={currentArtistName} currentAlbumName={currentAlbumName} currentAlbumArt={currentAlbumArt} lyricsCopyright={lyricsCopyright} pixelTrackingUrl={pixelTrackingUrl}  />

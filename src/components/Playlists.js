@@ -1,4 +1,6 @@
 import Table from 'react-bootstrap/Table'
+import spotifyLogo from "../images/Spotify.png"
+import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
 
 function Playlists({ allPlaylists, clickPlaylist }) {
   return (
@@ -6,6 +8,12 @@ function Playlists({ allPlaylists, clickPlaylist }) {
       {allPlaylists.length > 0 ?
         <div>
           <h1 className="font-link" style={{ textAlign: "center" }}>Your Playlists</h1>
+          <div style={{ textAlignLast: "center", paddingBottom: "0.5rem" }}>
+            <a href="https://open.spotify.com/" target="_blank" rel="noreferrer">
+              <img style={{ width: "32px", height: "32px" }} src={spotifyLogo} alt="spotify logo"/>
+            </a>
+            <BsFillArrowUpRightCircleFill style={{ width: "24px", height: "24px", paddingLeft: "5px" }} />
+          </div>
           <Table striped bordered hover size="sm" variant="dark" style={{ maxWidth: "max-content" }}>
             <tbody>
               {allPlaylists.map((playlist) => (
@@ -14,7 +22,7 @@ function Playlists({ allPlaylists, clickPlaylist }) {
                 </tr>
               ))}
             </tbody>
-          </Table>
+          </Table>   
         </div>
       : null}
     </div>

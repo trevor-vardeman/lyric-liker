@@ -1,14 +1,22 @@
 import { Link } from "react-router-dom"
 import Stack from 'react-bootstrap/Stack'
 import Table from 'react-bootstrap/Table'
+import spotifyLogo from "../images/Spotify.png"
+import { BsFillArrowUpRightCircleFill } from "react-icons/bs";
 
-function Songs({ currentPlaylistTracks, currentPlaylistName, clickSong }) {
+function Songs({ currentPlaylistTracks, currentPlaylistName, currentPlaylistId, clickSong }) {
   return (
     <Stack className="d-flex justify-content-center align-items-center" gap={3}>
       <Link className="btn btn-outline-dark btn-sm" to={"/playlists"}>{`< Back to Playlists`}</Link>
       {currentPlaylistTracks.length > 0 ?
         <div>
           <h1 className="font-link" style={{ textAlign: "center" }}>{currentPlaylistName}</h1>
+          <div style={{ textAlignLast: "center", paddingBottom: "0.5rem" }}>
+            <a href={`https://open.spotify.com/playlist/${currentPlaylistId}`} target="_blank" rel="noreferrer">
+              <img style={{ width: "32px", height: "32px" }} src={spotifyLogo} alt="spotify logo"/>
+            </a>
+            <BsFillArrowUpRightCircleFill style={{ width: "24px", height: "24px", paddingLeft: "5px" }} />
+          </div>   
           <Table striped bordered hover size="sm" variant="dark" style={{ maxWidth: "max-content" }}>
             <thead>
               <tr>
