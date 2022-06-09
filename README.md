@@ -2,6 +2,9 @@
 
 Hello, and welcome to Lyric Liker!
 
+## GIF Preview
+![]https://github.com/trevortx/lyric-liker/blob/main/src/images/Lyric-Liker.gif
+
 ## Introduction
 
 For this project, our requirements were to use create-react-app to create a single page application. We needed to use at least 5 components in a way that keeps things organized, and we also needed to use React Router to create at least 3 client-side routes. A server was also required to use GET and POST requests. APIs were optional for this project, but I decideed to use two. For styling, I went ahead and decided to use Bootstrap due to previous familiarity. Most of the time, I like simplicity in my styling.
