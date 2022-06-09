@@ -3,7 +3,7 @@
 Hello, and welcome to Lyric Liker!
 
 ## GIF Preview
-![]https://github.com/trevortx/lyric-liker/blob/main/src/images/Lyric-Liker.gif
+![][https://github.com/trevortx/lyric-liker/blob/main/src/images/Lyric-Liker.gif](https://github.com/trevortx/lyric-liker/blob/main/src/images/Lyric-Liker.gif?raw=true)
 
 ## Introduction
 
