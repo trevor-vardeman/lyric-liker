@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import Stack from 'react-bootstrap/Stack'
 
 function Login({ token, saveToken }) {
   const CLIENT_ID = "c3404f8cae724e35997b47c8531879c4"
@@ -24,9 +25,11 @@ function Login({ token, saveToken }) {
   }, [])
 
 return (
-    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
+    <Stack gap={3} className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
+      <h1 style={{ fontSize: "100px", color: "skyblue"}} className="font-link">Lyric Liker</h1>
+      <p>Find lyrics to songs in your Spotify playlists, or search for lyrics by artist and song name, and save them for later.</p>
       {!token ? <a className="btn btn-success" href={`${url}`}>Log in with Spotify</a> : null}
-    </div>
+    </Stack>
   )
 }
 

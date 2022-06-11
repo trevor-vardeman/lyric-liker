@@ -3,7 +3,7 @@ import { useHistory, Link} from "react-router-dom"
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 
-function Lyrics({ lyrics, lyricsId, currentTrackName, currentArtistName, currentAlbumName, currentAlbumArt, pixelTrackingUrl, lyricsCopyright }) {
+function Lyrics({ lyrics, currentTrackName, currentArtistName, currentAlbumName, currentAlbumArt, pixelTrackingUrl, lyricsCopyright }) {
   const [saveLyrics, setSaveLyrics] = useState(false)
   let history = useHistory()
 
@@ -12,7 +12,6 @@ function Lyrics({ lyrics, lyricsId, currentTrackName, currentArtistName, current
     else {
       setSaveLyrics(true)
       const songData = {
-        id: lyricsId,
         name: currentTrackName,
         artist: currentArtistName,
         album: currentAlbumName,

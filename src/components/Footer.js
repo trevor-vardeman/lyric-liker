@@ -1,7 +1,6 @@
 import githubLogo from "../images/GitHub-Mark-32px.png"
 
 function Footer({ token }) {
-  // keeps the footer from covering any data on screen
   let wrapperDiv = {
     display: 'block',
     padding: '8px',

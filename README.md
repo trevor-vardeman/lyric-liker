@@ -15,6 +15,9 @@ Well, I'm not as young as I once was. I find it harder and harder to take the ti
 
 However, sometimes a lyric will catch my ear, and I'll want to understand the context around the line, and then the whole song. With Lyric Liker, I can quickly save those lyrics into a database to be able to come back to later at a time when I'm less busy and have an opportunity to read and really comprehend the lyrics at my leisure. I hope you will too.
 
+## Blog Post
+I also wrote a [blog post](https://dev.to/trevortx/react-passing-state-to-a-sister-component-570d) that's somewhat related to this project. In the blog post, I discuss a few different things. The main theme of the post is to teach people how to pass state from one component to its sister component by way of the parent component. I also write about a controlled form and how to use the ternary operator. Check it out [here](https://dev.to/trevortx/react-passing-state-to-a-sister-component-570d).
+
 ## Installation Instructions
 1. Navigate to the project's [GitHub page](https://github.com/trevortx/lyric-liker) and choose your favorite method of downloading the project. I use SSH, so I would click "Code", ensure "SSH" is chosen, and copy the link.
 2. Then open your terminal and navigate to a directory in which you'd like to install the app. 

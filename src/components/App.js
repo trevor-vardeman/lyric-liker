@@ -11,12 +11,10 @@ function App() {
   const [token, setToken] = useState()
   let history = useHistory()
 
-  // set token for Spotify authentication
   function saveToken(token) {
     setToken(token)
   }
   
-  // handle logout
   function logout() {
     window.localStorage.removeItem("token")
     setToken("")

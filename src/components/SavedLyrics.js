@@ -28,11 +28,20 @@ function SavedLyrics({ saveLyrics }) {
 
   return (
     <Stack className="d-flex justify-content-center align-items-center" gap={3}>
+      <h1 className="font-link">Saved Lyrics</h1>
       {savedSongs.length > 0 ?
         savedSongs.map((song) => (
-          <div key={song.id} className="text-center" style={{ whiteSpace: "pre", paddingBottom:"5px" }}>
+          <div key={song.id} className="text-center" style={{ whiteSpace: "pre", paddingBottom: "0.5rem" }}>
             <Stack direction="horizontal" gap={3} style={ {border: "2px solid black", paddingRight: "10px" }}>
-              <img src={song.album_art} alt={`album artwork for ${song.album}`}/>
+              <img 
+                style={{ width: "300px", height: "300px" }}
+                src={song.album_art} 
+                alt={`album artwork for ${song.album}`}
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null
+                  currentTarget.src="https://via.placeholder.com/300?text=No+Album+Art"}
+                }
+              />
               <div>
                 <h2 className="font-link">{song.name}</h2>
                 <h4><span style={{ color: "skyblue" }}>by</span> {song.artist}</h4>
